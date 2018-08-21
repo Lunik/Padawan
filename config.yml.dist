@@ -1,0 +1,9 @@
+--- 
+
+record_pattern: "padawan-%DIGITS%"
+ipv6_subnet: "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa."
+records:
+  - type: NS
+    value: "ns.padawan.example.com"
+  - type: SOA
+    value: "ns.padawan.example.com"
