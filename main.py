@@ -3,12 +3,14 @@ from time import sleep
 from dnslib.server import DNSServer
 
 from lib.resolver import Resolver
+from lib.config import Config
 
 if __name__ == '__main__':
+    CONFIG = Config()
     resolver = Resolver()
     servers = [
-        DNSServer(resolver, port=5053, address='localhost', tcp=True),
-        DNSServer(resolver, port=5053, address='localhost', tcp=False),
+        DNSServer(resolver, port=CONFIG.server['port'], address=CONFIG.server['address'], tcp=True),
+        DNSServer(resolver, port=CONFIG.server['port'], address=CONFIG.server['address'], tcp=False),
     ]
 
     for s in servers:

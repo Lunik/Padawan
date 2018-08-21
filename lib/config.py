@@ -27,3 +27,5 @@ class Config:
                 Record(TXT, 'PadawanV6 respond only to \'' + self.ipv6_subnet + '\' zone')
             ] + [Record(RECORD_TYPE[record['type']], record['value']) for record in cfg['records']]
         }
+
+        self.server = cfg['server']
