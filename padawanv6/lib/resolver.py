@@ -29,7 +29,6 @@ class Resolver:
     def resolve(self, request, handler):
         reply = request.reply()
 
-        print(CONFIG.ipv6_subnet,  str(request.q.qname))
         if request.q.qtype == QTYPE.PTR and CONFIG.ipv6_subnet in str(request.q.qname):
             for record in CONFIG.records['ok']:
                 reply.add_answer(record.as_rr(request.q.qname))

@@ -1,4 +1,6 @@
 import yaml
+import os.path
+from shutil import copyfile
 
 from dnslib import NS, SOA, TXT
 
@@ -10,8 +12,14 @@ RECORD_TYPE = {
     'TXT': TXT
 }
 
+CONFIG_DIR = "/etc/padawanv6"
+CONFIG_FILE = CONFIG_DIR + "/config.yml"
+
 class Config:
-    def __init__(self, config_file="/etc/padawanv6/config.yml"):
+    def __init__(self, config_file=CONFIG_FILE):
+        if not os.path.exists(CONFIG_FILE):
+            copyfile(CONFIG_FILE + ".dist", CONFIG_FILE)
+
         with open(config_file, 'r') as ymlfile:
             cfg = yaml.load(ymlfile)
 
