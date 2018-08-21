@@ -1,13 +1,21 @@
 --- 
 
+# Pattern for PTR records responses
 record_pattern: "padawan-%DIGITS%"
+
+# Subnet to responds for
+# 2001:1234:5678:9101::/64 gives 1.0.1.9.8.7.6.5.4.3.2.1.1.0.0.2
 ipv6_subnet: "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa."
+
+# DNS records to return when request is not valid
+# Request not in the subnet scope or not a PTR request
 records:
   - type: NS
     value: "ns.padawan.example.com"
   - type: SOA
     value: "ns.padawan.example.com"
 
+# DNS servers parameters
 server:
   port: 5053
   address: 0.0.0.0
