@@ -23,8 +23,6 @@ do_stop () {
   pid=$(cat $PID_FILE)
 
   kill $pid
-  wait $pid
-  exit_code=$?
 
   rm $PID_FILE
   exit $exit_code
