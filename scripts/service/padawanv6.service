@@ -3,10 +3,11 @@ Description=Dynamic DNS and Reverse DNS for IPv6
 After=network.target
 
 [Service]
-ExecStart=/etc/systemd/system/padawanv6 start
+ExecStart=/usr/bin/env padawanv6
 Type=simple
-PIDFile=/run/padawanv6.pid
-ExecStop=/etc/systemd/system/padawanv6 stop
+
+StandardOutput=file:/var/log/padawanv6.log
+StandardError=file:/var/log/padawanv6.log
 
 [Install]
 WantedBy=multi-user.target

@@ -33,7 +33,7 @@ class Resolver:
             for record in CONFIG.records['ok']:
                 reply.add_answer(record.as_rr(request.q.qname))
 
-            ipv6_digits = str(request.q.qname).replace(CONFIG.ipv6_subnet, '').replace('.', '')
+            ipv6_digits = str(request.q.qname).replace(CONFIG.ipv6_subnet, '').replace('.', '')[::-1]
             code = CONFIG.record_pattern.replace(CONFIG.DIGIT_TAG, ipv6_digits)
             reply.add_answer(Record(PTR, code).as_rr(request.q.qname))
         else:
