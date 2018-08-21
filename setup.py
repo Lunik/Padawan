@@ -12,7 +12,7 @@ setup(name='PadawanV6',
       scripts=['scripts/padawanv6'],
       data_files=[
           ('/etc/padawanv6', ['config.yml.dist']),
-          ('/etc/init.d', ['scripts/init/padawanv6']),
+          ('/etc/systemd/system', ['scripts/init/padawanv6']),
           ('/lib/systemd/system', ['scripts/service/padawanv6.service'])
       ]
 )

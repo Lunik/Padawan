@@ -20,6 +20,7 @@ server:
   port: 5053
   address: 0.0.0.0
 
+# Log Configuration
 logs:
   debug_level: info
   filename: /var/log/padawanv6.log
