@@ -1,5 +1,4 @@
 import yaml
-import logging
 import os.path
 from shutil import copyfile
 
@@ -11,14 +10,6 @@ RECORD_TYPE = {
     'NS': NS,
     'SOA': SOA,
     'TXT': TXT
-}
-
-DEBUG_LEVEL = {
-    'info': logging.INFO,
-    'debug': logging.DEBUG,
-    'warning': logging.WARNING,
-    'error': logging.ERROR,
-    'critical': logging.CRITICAL
 }
 
 CONFIG_DIR = "/etc/padawanv6"
@@ -46,8 +37,3 @@ class Config:
         }
 
         self.server = cfg['server']
-
-        logging.basicConfig(
-                format='%(asctime)s [%(name)s] %(levelname)s - %(message)s',
-                filename=cfg['logs']['filename'],
-                level=DEBUG_LEVEL[cfg['logs']['debug_level']])
