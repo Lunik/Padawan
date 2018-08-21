@@ -1,6 +1,6 @@
 # INIT Script for PadawanV6
 
-PATH=/bin
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 PID_FILE=/run/padawanv6.pid
 LOG_DIR=/var/log/padawanv6.log
 
