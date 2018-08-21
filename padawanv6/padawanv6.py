@@ -1,4 +1,5 @@
 from time import sleep
+import logging
 
 from dnslib.server import DNSServer
 
@@ -9,6 +10,7 @@ CONFIG = Config()
 
 class PadawanV6:
     def __init__(self):
+        self.logger = logging.getLogger('PadawanV6')
         resolver = Resolver()
         self.servers = [
             DNSServer(resolver, port=CONFIG.server['port'], address=CONFIG.server['address'], tcp=True),
@@ -18,9 +20,9 @@ class PadawanV6:
     def start(self):
         for s in self.servers:
             s.start_thread()
-        print("DNS server start on " + str(CONFIG.server['address']) + ":" + str(CONFIG.server['port']))
+        self.logger.info("DNS server start on " + str(CONFIG.server['address']) + ":" + str(CONFIG.server['port']))
 
     def stop(self):
         for s in self.servers:
             s.stop()
-        print("DNS server stop")
+        self.logger.ingo("DNS server stop")
