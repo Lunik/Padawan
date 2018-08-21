@@ -2,7 +2,7 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 PID_FILE=/run/padawanv6.pid
-LOG_DIR=/var/log/padawanv6.log
+LOG_FILE=/var/log/padawanv6.log
 
 usage () {
   echo "Usage: $0 [start|stop|status|restart]" >&2
@@ -10,7 +10,7 @@ usage () {
 
 do_start () {
   echo "Starting PadawanV6..."
-  /usr/local/bin/padawanv6 &
+  /usr/bin/env padawanv6 & > $LOG_FILE 2>&1
   echo $! > $PID_FILE
 }
 
@@ -23,11 +23,8 @@ do_stop () {
   pid=$(cat $PID_FILE)
 
   kill $pid
-  wait $pid
-  exit_code=$?
 
   rm $PID_FILE
-  exit $exit_code
 }
 
 do_status () {
@@ -49,6 +46,7 @@ do_status () {
 case "$1" in
   start)
     do_start
+    do_status
     ;;
   restart)
     do_stop
@@ -59,6 +57,8 @@ case "$1" in
     ;;
   stop)
     do_stop
+    do_status
+    exit $exit_code
     ;;
   *)
     usage
