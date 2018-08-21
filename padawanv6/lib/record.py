@@ -38,7 +38,7 @@ class Record:
         self.kwargs = dict(
             rdata=rdata,
             ttl=self.sensible_ttl() if ttl is None else ttl,
-            **kwargs,
+            **kwargs
         )
 
     def try_rr(self, q):
