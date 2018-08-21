@@ -2,3 +2,4 @@
 --index-url https://pypi.python.org/simple/
 
 dnslib>=0.9,<2
+pyaml>17.12,<18
