@@ -47,6 +47,7 @@ do_status () {
 case "$1" in
   start)
     do_start
+    do_status
     ;;
   restart)
     do_stop
@@ -57,6 +58,7 @@ case "$1" in
     ;;
   stop)
     do_stop
+    do_status
     ;;
   *)
     usage
