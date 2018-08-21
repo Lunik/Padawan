@@ -1,0 +1,67 @@
+# INIT Script for PadawanV6
+
+PATH=/bin
+PID_FILE=/run/padawanv6.pid
+LOG_DIR=/var/log/padawanv6.log
+
+usage () {
+  echo "Usage: $0 [start|stop|status|restart]" >&2
+}
+
+do_start () {
+  echo "Starting PadawanV6..."
+  /usr/local/bin/padawanv6 &
+  echo $! > $PID_FILE
+}
+
+do_stop () {
+  if ! [ -f $PID_FILE ]; then
+    echo "PadawanV6 is already stopped."
+    exit 0
+  fi
+
+  pid=$(cat $PID_FILE)
+
+  kill $pid
+  wait $pid
+  exit_code=$?
+
+  rm $PID_FILE
+  exit $exit_code
+}
+
+do_status () {
+  if ! [ -f $PID_FILE ]; then
+    echo "PadawanV6 is stopped."
+    exit 0
+  fi
+
+  pid=$(cat $PID_FILE)
+
+  ps aux -p $pid > /dev/null
+  if [ $? -eq 0 ]; then
+    echo "PadawanV6 is running."
+  else
+    echo "PadawanV6 is not running."
+  fi
+}
+
+case "$1" in
+  start)
+    do_start
+    ;;
+  restart)
+    do_stop
+    do_start
+    ;;
+  status)
+    do_status
+    ;;
+  stop)
+    do_stop
+    ;;
+  *)
+    usage
+    exit 3
+    ;;
+esac

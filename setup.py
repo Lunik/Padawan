@@ -11,6 +11,8 @@ setup(name='PadawanV6',
       packages=['padawanv6', 'padawanv6/lib'],
       scripts=['scripts/padawanv6'],
       data_files=[
-          ('/etc/padawanv6', ['config.yml.dist'])
+          ('/etc/padawanv6', ['config.yml.dist']),
+          ('/etc/init.d', ['scripts/init/padawanv6']),
+          ('/lib/systemd/system', ['scripts/service/padawanv6.service'])
       ]
 )
