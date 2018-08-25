@@ -15,6 +15,12 @@ class Config:
 
         self.DIGIT_TAG = "%DIGITS%"
         self.record_pattern = cfg['record_pattern']
+        patterns = self.record_pattern.split(self.DIGIT_TAG)
+        self.pattern = {
+        	'prefix': patterns[0],
+        	'sufix': patterns[1]
+        }
+        
         self.ipv6_subnet = cfg['ipv6_subnet']
 
         self.server = cfg['server']

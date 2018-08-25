@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from dnslib import QTYPE, RD, RR
-from dnslib import NS, SOA, TXT, PTR
+from dnslib import NS, SOA, TXT, PTR, AAAA
 
 EPOCH = datetime(1970, 1, 1)
 SERIAL = int((datetime.utcnow() - EPOCH).total_seconds())
@@ -10,7 +10,8 @@ TYPE_LOOKUP = {
     NS: QTYPE.NS,
     SOA: QTYPE.SOA,
     TXT: QTYPE.TXT,
-    PTR: QTYPE.PTR
+    PTR: QTYPE.PTR,
+    AAAA: QTYPE.AAAA
 }
 
 class Record:
