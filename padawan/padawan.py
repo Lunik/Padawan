@@ -7,7 +7,7 @@ from .lib.config import Config
 
 CONFIG = Config()
 
-class PadawanV6:
+class Padawan:
     def __init__(self):
         resolver = Resolver()
         self.servers = [
