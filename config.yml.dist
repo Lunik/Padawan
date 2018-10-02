@@ -11,3 +11,5 @@ ipv6_subnet: "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa."
 server:
   port: 5053
   address: 0.0.0.0
+
+myip_field: "myip.exemple.fr"

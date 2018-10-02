@@ -24,3 +24,5 @@ class Config:
         self.ipv6_subnet = cfg['ipv6_subnet']
 
         self.server = cfg['server']
+
+        self.myip_field = cfg['myip_field']

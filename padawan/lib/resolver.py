@@ -15,25 +15,14 @@ class Resolver:
         reply = request.reply()
 
         if request.q.qtype == QTYPE.PTR and CONFIG.ipv6_subnet in str(request.q.qname):
-
-            
-            ipv6_digits = ipv6_ip_to_id(str(request.q.qname))
-            code = ipv6_id_to_ptr_record(ipv6_digits)
-
-            dns_record = Record(PTR, code).as_rr(request.q.qname)
-            self.append_reply(reply, dns_record)
+            self.resolve_ipv6_ptr(request, reply)
 
         elif request.q.qtype == QTYPE.AAAA and ipv6_is_ptr_match_pattern(str(request.q.qname)):
+            self.resolve_ipv6_aaaa(request, reply)
 
-            ipv6_digits = ipv6_ptr_record_to_id(str(request.q.qname))
+        elif request.q.qtype == QTYPE.TXT and str(request.q.qname) == CONFIG.myip_field:
+            self.resolve_myip_txt(request, reply, handler)
 
-            ipv6_subnet = ipv6_arpa_to_id(CONFIG.ipv6_subnet)
-
-            ip = ipv6_id_to_ip(ipv6_subnet + ipv6_digits)
-
-
-            dns_record = Record(AAAA, ip).as_rr(request.q.qname)
-            self.append_reply(reply, dns_record)
         else:
             reply.header.rcode = getattr(RCODE, 'NXDOMAIN')
 
@@ -47,3 +36,23 @@ class Resolver:
             print(err)
             reply.header.rcode = getattr(RCODE, 'NXDOMAIN')
 
+    def resolve_ipv6_ptr (self, request, reply):
+        ipv6_digits = ipv6_ip_to_id(str(request.q.qname))
+        code = ipv6_id_to_ptr_record(ipv6_digits)
+
+        dns_record = Record(PTR, code).as_rr(request.q.qname)
+        self.append_reply(reply, dns_record)
+
+    def resolve_ipv6_aaaa (self, request, reply):
+        ipv6_digits = ipv6_ptr_record_to_id(str(request.q.qname))
+
+        ipv6_subnet = ipv6_arpa_to_id(CONFIG.ipv6_subnet)
+        ip = ipv6_id_to_ip(ipv6_subnet + ipv6_digits)
+
+
+        dns_record = Record(AAAA, ip).as_rr(request.q.qname)
+        self.append_reply(reply, dns_record)
+
+    def resolve_myip_txt (self, request, reply, handler):
+        dns_record = Record(TXT, str(handler.client_address[0])).as_rr(request.q.qname)
+        self.append_reply(reply, dns_record)
