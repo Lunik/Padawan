@@ -2,10 +2,10 @@
 
 from time import sleep
 
-from padawanv6 import PadawanV6
+from padawan import Padawan
 
 if __name__ == "__main__":
-    app = PadawanV6()
+    app = Padawan()
     app.start()
 
     try:

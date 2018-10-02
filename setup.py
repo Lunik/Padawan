@@ -2,16 +2,16 @@
 
 from distutils.core import setup
 
-setup(name='PadawanV6',
+setup(name='Padawan',
       version='0.1.0',
-      description='Reverse DNS resolver for IPv6',
+      description='Reverse DNS resolver',
       author='Guillaume Lunik',
       author_email='contact@lunik.xyz',
       url='https://github.com/Lunik/PadawanV6',
-      packages=['padawanv6', 'padawanv6/lib'],
-      scripts=['scripts/padawanv6'],
+      packages=['padawan', 'padawan/lib'],
+      scripts=['scripts/padawan'],
       data_files=[
-          ('/etc/padawanv6', ['config.yml.dist']),
-          ('/lib/systemd/system', ['scripts/service/padawanv6.service'])
+          ('/etc/padawan', ['config.yml.dist']),
+          ('/lib/systemd/system', ['scripts/service/padawan.service'])
       ]
 )

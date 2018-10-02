@@ -2,7 +2,7 @@ import yaml
 import os.path
 from shutil import copyfile
 
-CONFIG_DIR = "/etc/padawanv6"
+CONFIG_DIR = "/etc/padawan"
 CONFIG_FILE = CONFIG_DIR + "/config.yml"
 
 class Config:
@@ -20,7 +20,7 @@ class Config:
         	'prefix': patterns[0],
         	'sufix': patterns[1]
         }
-        
+
         self.ipv6_subnet = cfg['ipv6_subnet']
 
         self.server = cfg['server']

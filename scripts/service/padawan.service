@@ -1,0 +1,13 @@
+[Unit]
+Description=Dynamic DNS and Reverse DNS
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/env padawan
+Type=simple
+
+StandardOutput=file:/var/log/padawan.log
+StandardError=file:/var/log/padawan.log
+
+[Install]
+WantedBy=multi-user.target

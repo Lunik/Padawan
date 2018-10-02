@@ -1,7 +1,7 @@
-# INIT Script for PadawanV6
+# INIT Script for Padawan
 
 ## BEGIN INIT INFO
-# Provides: PadawanV6
+# Provides: Padawan
 # Required-Start: $local_fs $network $remote_fs
 # Required-Stop: $local_fs $network $remote_fs
 # Default-Start: 2 3 4 5
@@ -10,22 +10,22 @@
 ### END INIT INFO
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-PID_FILE=/run/padawanv6.pid
-LOG_FILE=/var/log/padawanv6.log
+PID_FILE=/run/padawan.pid
+LOG_FILE=/var/log/padawan.log
 
 usage () {
   echo "Usage: $0 [start|stop|status|restart]" >&2
 }
 
 do_start () {
-  echo "Starting PadawanV6..."
-  /usr/bin/env padawanv6 & > $LOG_FILE 2>&1
+  echo "Starting Padawan..."
+  /usr/bin/env padawan & > $LOG_FILE 2>&1
   echo $! > $PID_FILE
 }
 
 do_stop () {
   if ! [ -f $PID_FILE ]; then
-    echo "PadawanV6 is already stopped."
+    echo "Padawan is already stopped."
     exit 0
   fi
 
@@ -38,7 +38,7 @@ do_stop () {
 
 do_status () {
   if ! [ -f $PID_FILE ]; then
-    echo "PadawanV6 is stopped."
+    echo "Padawan is stopped."
     exit 0
   fi
 
@@ -46,9 +46,9 @@ do_status () {
 
   ps aux -p $pid > /dev/null
   if [ $? -eq 0 ]; then
-    echo "PadawanV6 is running."
+    echo "Padawan is running."
   else
-    echo "PadawanV6 is not running."
+    echo "Padawan is not running."
   fi
 }
 
