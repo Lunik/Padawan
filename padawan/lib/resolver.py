@@ -20,7 +20,7 @@ class Resolver:
         elif request.q.qtype == QTYPE.AAAA and ipv6_is_ptr_match_pattern(str(request.q.qname)):
             self.resolve_ipv6_aaaa(request, reply)
 
-        elif request.q.qtype == QTYPE.TXT and str(request.q.qname) == CONFIG.myip_field:
+        elif request.q.qtype == QTYPE.TXT and str(request.q.qname) == CONFIG.myip_domain:
             self.resolve_myip_txt(request, reply, handler)
 
         else:

@@ -12,4 +12,4 @@ server:
   port: 5053
   address: 0.0.0.0
 
-myip_field: "myip.exemple.fr"
+myip_domain: "myip.exemple.fr"

@@ -25,4 +25,4 @@ class Config:
 
         self.server = cfg['server']
 
-        self.myip_field = cfg['myip_field']
+        self.myip_domain = cfg['myip_domain']
