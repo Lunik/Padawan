@@ -22,6 +22,7 @@ class Config:
         }
 
         self.ipv6_subnet = cfg['ipv6_subnet']
+        self.ipv6_linklocal = "0.8.e.f.ip6.arpa."
 
         self.server = cfg['server']
 

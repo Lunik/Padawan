@@ -14,7 +14,7 @@ class Resolver:
     def resolve(self, request, handler):
         reply = request.reply()
 
-        if request.q.qtype == QTYPE.PTR and CONFIG.ipv6_subnet in str(request.q.qname):
+        if request.q.qtype == QTYPE.PTR and (CONFIG.ipv6_subnet in str(request.q.qname) or CONFIG.ipv6_linklocal in str(request.q.qname)):
             self.resolve_ipv6_ptr(request, reply)
 
         elif request.q.qtype == QTYPE.AAAA and ipv6_is_ptr_match_pattern(str(request.q.qname)):
@@ -47,6 +47,12 @@ class Resolver:
         ipv6_digits = ipv6_ptr_record_to_id(str(request.q.qname))
 
         ipv6_subnet = ipv6_arpa_to_id(CONFIG.ipv6_subnet)
+
+        pattern = r'local-[0-9a-f]*'
+        if (re.match(pattern, ipv6_digits)):
+            ipv6_subnet = 'fe80'
+            ipv6_digits = ipv6_digits.replace('local-', '')
+
         ip = ipv6_id_to_ip(ipv6_subnet + ipv6_digits)
 
 

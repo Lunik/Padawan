@@ -7,7 +7,12 @@ CONFIG = Config()
 # Get only the last digits of the device
 # 2001:1234:5678:9101:1121:3141:5161:7181 --> 1121314151617181
 def ipv6_ip_to_id(ip):
-	return str(ip).replace(CONFIG.ipv6_subnet, '').replace('.', '')[::-1]
+  pattern = r'([0-9a-f].)*0.8.e.f.ip6.arpa.'
+  print(ip)
+  if (re.match(pattern, ip)):
+    return "local-" + str(ip).replace(CONFIG.ipv6_linklocal, '').replace('.', '')[::-1]
+  else:
+    return str(ip).replace(CONFIG.ipv6_subnet, '').replace('.', '')[::-1]
 
 # Apply the pattern
 # pattern = %DIGITS%.ipv6.exemple.com
@@ -19,8 +24,8 @@ def ipv6_ptr_record_to_id(record):
 	return str(record).replace(CONFIG.pattern['prefix'], '').replace(CONFIG.pattern['sufix'], '')
 
 def ipv6_is_ptr_match_pattern(record):
-	pattern = r'' + CONFIG.pattern['prefix'] + '[0-9a-f]*' + CONFIG.pattern['sufix']
-	return bool(re.match(pattern, record))
+  pattern = r'' + CONFIG.pattern['prefix'] + '(local-)?[0-9a-f]*' + CONFIG.pattern['sufix']
+  return bool(re.match(pattern, record))
 
 def ipv6_arpa_to_id(arpa_ip):
 	return ''.join(arpa_ip.replace('.ip6.arpa.', '').split('.'))[::-1]
